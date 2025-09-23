@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Government Farming Policies & Schemes — For Farmers</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-green: #2d5016;
+      --secondary-green: #4a7c23;
+      --light-green: #7fb069;
+      --accent-green: #a7d129;
+      --earth-brown: #8b4513;
+      --warm-beige: #f5f5dc;
+      --golden-yellow: #ffd700;
+      --sky-blue: #87ceeb;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --medium-gray: #6c757d;
+      --dark-gray: #343a40;
+
+      --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-heading: 'Georgia', serif;
+
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 3rem;
+      --spacing-xl: 4rem;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: var(--font-primary);
+      line-height: 1.6;
+      color: var(--dark-gray);
+      background-color: var(--white);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--primary-green);
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    p { margin-bottom: var(--spacing-sm); }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: var(--white);
+      padding: var(--spacing-sm) 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+
+    .logo::before {
+      content: "🌾";
+      font-size: 2rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: var(--spacing-md);
+    }
+
+    .nav-menu a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      transition: background-color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Search + Quick links */
+    .search-box {
+      margin: var(--spacing-md) 0;
+      text-align: center;
+    }
+
+    .search-box input {
+      width: 80%;
+      max-width: 500px;
+      padding: var(--spacing-sm);
+      border: 2px solid #e9ecef;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+    }
+
+    .quick-links {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .quick-links a {
+      display: inline-block;
+      margin: 0 var(--spacing-xs) var(--spacing-xs) 0;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      background: var(--light-green);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .quick-links a:hover {
+      background: var(--accent-green);
+      color: var(--dark-gray);
+    }
+
+    /* Schemes */
+    .scheme {
+      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-md);
+      background: var(--light-gray);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .scheme h2 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .scheme .meta {
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-green);
+      color: var(--white);
+      padding: var(--spacing-md);
+      text-align: center;
+      margin-top: var(--spacing-lg);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        flex-direction: column;
+        background: var(--primary-green);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        display: none;
+        padding: var(--spacing-md);
+      }
+      .nav-menu.active { display: flex; }
+      .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">Farming Schemes</a>
+      <button class="menu-toggle">☰</button>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#pmkisan">PM-KISAN</a></li>
+          <li><a href="#pmfby">PMFBY</a></li>
+          <li><a href="#kcc">KCC</a></li>
+          <li><a href="#soilhealth">Soil Health Card</a></li>
+          <li><a href="#enam">e-NAM</a></li>
+          <li><a href="#pdmc">Per Drop More Crop</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="search-box">
+      <input type="search" id="q" placeholder="Search a scheme (e.g. insurance, credit, support)" aria-label="Search scheme" />
+    </div>
+
+    <div class="quick-links">
+      <a href="#pmkisan">PM-KISAN</a>
+      <a href="#pmfby">PMFBY</a>
+      <a href="#kcc">KCC</a>
+      <a href="#soilhealth">Soil Health Card</a>
+      <a href="#enam">e-NAM</a>
+      <a href="#pdmc">Per Drop More Crop</a>
+    </div>
+
+    <!-- Schemes -->
+    <div class="scheme" id="pmkisan">
+      <h2>PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)</h2>
+      <p class="meta">Direct income support — <a href="https://pmkisan.gov.in" target="_blank">pmkisan.gov.in</a></p>
+      <ul>
+        <li><strong>What:</strong> Cash transfers to eligible farmer families.</li>
+        <li><strong>Eligibility:</strong> Small & marginal farmers; Aadhaar & land records.</li>
+        <li><strong>Apply:</strong> Via PM-KISAN portal or CSC.</li>
+      </ul>
+    </div>
+
+    <div class="scheme" id="pmfby">
+      <h2>PMFBY (Pradhan Mantri Fasal Bima Yojana)</h2>
+      <p class="meta">Crop insurance — <a href="https://pmfby.gov.in" target="_blank">pmfby.gov.in</a></p>
+      <ul>
+        <li><strong>What:</strong> Insurance for crops against yield loss & risks.</li>
+        <li><strong>Eligibility:</strong> Loanee & non-loanee farmers.</li>
+        <li><strong>Claim:</strong> Via insurer, CSCs, or mandi offices.</li>
+      </ul>
+    </div>
+
+    <div class="scheme" id="kcc">
+      <h2>Kisan Credit Card (KCC)</h2>
+      <p class="meta">Crop loans — <a href="https://sbi.co.in/web/agri-rural/agriculture-banking/crop-loan/kisan-credit-card" target="_blank">SBI KCC</a></p>
+      <ul>
+        <li><strong>What:</strong> Credit for crop expenses & allied activities.</li>
+        <li><strong>Eligibility:</strong> Farmers with cultivable land.</li>
+        <li><strong>Apply:</strong> Banks or CSC.</li>
+      </ul>
+    </div>
+
+    <div class="scheme" id="soilhealth">
+      <h2>Soil Health Card (SHC)</h2>
+      <p class="meta">Soil testing — <a href="https://soilhealth.dac.gov.in/" target="_blank">soilhealth.dac.gov.in</a></p>
+      <ul>
+        <li><strong>What:</strong> Soil test with crop-wise nutrient suggestions.</li>
+        <li><strong>Eligibility:</strong> All farmers with land.</li>
+        <li><strong>Use:</strong> Plan fertilizers accordingly.</li>
+      </ul>
+    </div>
+
+    <div class="scheme" id="enam">
+      <h2>e-NAM (National Agriculture Market)</h2>
+      <p class="meta">Online mandi — <a href="https://enam.gov.in" target="_blank">enam.gov.in</a></p>
+      <ul>
+        <li><strong>What:</strong> Connects mandis for better market access.</li>
+        <li><strong>Eligibility:</strong> Farmers, traders, buyers.</li>
+        <li><strong>Register:</strong> Via portal or mandi officials.</li>
+      </ul>
+    </div>
+
+    <div class="scheme" id="pdmc">
+      <h2>Per Drop More Crop (PDMC)</h2>
+      <p class="meta">Micro-irrigation support — <a href="https://pmksy.gov.in" target="_blank">pmksy.gov.in</a></p>
+      <ul>
+        <li><strong>What:</strong> Subsidy for drip & sprinkler systems.</li>
+        <li><strong>Eligibility:</strong> Individuals, FPOs, farmer groups.</li>
+        <li><strong>Apply:</strong> State agriculture dept. or PMKSY portal.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Last verified on official portals. For latest updates, consult your State Agriculture Department or nearest CSC.</p>
+  </footer>
+
+  <script>
+    // Search filter
+    document.getElementById('q').addEventListener('keydown', function(e){
+      if(e.key === 'Enter') {
+        e.preventDefault();
+        var v = this.value.toLowerCase();
+        var schemes = document.querySelectorAll('.scheme');
+        for (var s of schemes) {
+          var title = s.querySelector('h2').textContent.toLowerCase();
+          if (title.includes(v)) {
+            s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
+        }
+        alert('No scheme found for: ' + this.value);
+      }
+    });
+
+    // Mobile menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function(){
+      document.querySelector('.nav-menu').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
