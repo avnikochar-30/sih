@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Krishi Bazaar - Market Intelligence Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --kerala-green: #0f4c3a;
+            --tropical-green: #2d5016;
+            --coconut-brown: #8b4513;
+            --spice-gold: #d4af37;
+            --rice-cream: #f5f5dc;
+            --monsoon-blue: #4682b4;
+            --sunrise-orange: #ff6b35;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --warning-red: #dc3545;
+            --success-green: #28a745;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--kerala-green) 0%, var(--tropical-green) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--spice-gold), var(--sunrise-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .beta-badge {
+            background: var(--sunrise-orange);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(15, 76, 58, 0.8), rgba(45, 80, 22, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c23" width="1200" height="600"/><circle fill="%23d4af37" cx="200" cy="150" r="30" opacity="0.3"/><circle fill="%23ff6b35" cx="800" cy="400" r="40" opacity="0.2"/><path fill="%237fb069" d="M0 400l50-10c50-10 150-30 250-30s200 20 300 25c100 5 200-5 300-15s200-20 250-25l50-5v260H0z" opacity="0.4"/></svg>') center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .disclaimer {
+            background: rgba(255, 193, 7, 0.2);
+            color: #856404;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 193, 7, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .main-content {
+            margin: 3rem 0;
+        }
+
+        .api-notice {
+            background: linear-gradient(45deg, var(--monsoon-blue), #5a9fd4);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .api-notice h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .api-notice p {
+            margin-bottom: 0.5rem;
+        }
+
+        .api-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .api-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .api-item strong {
+            color: var(--spice-gold);
+        }
+
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--kerala-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-select, .form-input {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: var(--tropical-green);
+            box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, var(--kerala-green), var(--tropical-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .price-card, .yield-card, .market-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::before, .yield-card::before, .market-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--spice-gold), var(--sunrise-orange));
+        }
+
+        .price-card:hover, .yield-card:hover, .market-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--kerala-green), var(--tropical-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--kerala-green);
+        }
+
+        .price-display {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--spice-gold);
+            display: block;
+        }
+
+        .price-unit {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .price-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .trend-up {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success-green);
+        }
+
+        .trend-down {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--warning-red);
+        }
+
+        .trend-stable {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+        }
+
+        .data-source {
+            background: var(--light-gray);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .yield-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--kerala-green);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .market-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .market-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .market-item:hover {
+            background: var(--light-gray);
+        }
+
+        .market-info {
+            flex-grow: 1;
+        }
+
+        .market-name {
+            font-weight: 600;
+            color: var(--kerala-green);
+        }
+
+        .market-type {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .market-distance {
+            font-size: 0.9rem;
+            color: var(--monsoon-blue);
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--kerala-green);
+        }
+
+        .loading-spinner {
+            font-size: 3rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tips-section {
+            background: var(--rice-cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--spice-gold);
+        }
+
+        .tips-title {
+            color: var(--kerala-green);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: var(--kerala-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .search-grid, .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none; /* Simple solution for mobile, a burger menu would be better */
+            }
+            
+            .yield-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .seasonal-info {
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(212, 175, 55, 0.1));
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--sunrise-orange);
+        }
+
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow);
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🌾</span>
+                <span>Kerala Krishi Bazaar</span>
+               
+            </div>
+            <nav class="nav-links">
+                <a href="#prices">Market Prices</a>
+                <a href="#yield">Yield Calculator</a>
+                <a href="#markets">Nearby Markets</a>
+                <a href="#opportunities">Opportunities</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>🥥 Kerala Agricultural Market Intelligence 🌶️</h1>
+            <p>Advanced crop yield calculations, market analysis, and location-based farming guidance for Kerala's agricultural community</p>
+            
+            
+        </div>
+    </section>
+
+    <div class="container">
+        <main class="main-content">
+            <section class="api-notice">
+                <h3>🔗 Real-Time Data Integration Ready</h3>
+                <p>This platform is designed to integrate with live market data APIs. Currently showing simulated data for demonstration.</p>
+                <div class="api-list">
+                    <div class="api-item"><strong>AgMarkNet API:</strong><br>Govt. of India marketing data</div>
+                    <div class="api-item"><strong>Kerala AgriTech APIs:</strong><br>State government databases</div>
+                    <div class="api-item"><strong>Commodity Exchanges:</strong><br>NCDEX, MCX live prices</div>
+                    <div class="api-item"><strong>Weather APIs:</strong><br>IMD, OpenWeather integration</div>
+                </div>
+            </section>
+
+            <section class="search-section">
+                <h2 style="color: var(--kerala-green); margin-bottom: 1.5rem; text-align: center;">🔍 Crop Market Analysis</h2>
+                
+                <div class="search-grid">
+                    <div class="form-group">
+                        <label class="form-label">🌾 Select Crop</label>
+                        <select class="form-select" id="cropSelect">
+                            <option value="">Choose your crop...</option>
+                            <option value="rice">Rice (Paddy) - നെല്ല്</option>
+                            <option value="coconut">Coconut - തെങ്ങ്</option>
+                            <option value="rubber">Rubber - റബ്ബർ</option>
+                            <option value="pepper">Black Pepper - കുരുമുളക്</option>
+                            <option value="cardamom">Cardamom - ഏലം</option>
+                            <option value="ginger">Ginger - ഇഞ്ചി</option>
+                            <option value="turmeric">Turmeric - മഞ്ഞൾ</option>
+                            <option value="cashew">Cashew - കശുവണ്ടി</option>
+                            <option value="banana">Banana - വാഴ</option>
+                            <option value="plantain">Plantain - ഏത്തക്കായ</option>
+                            <option value="pineapple">Pineapple - കൈതച്ചക്ക</option>
+                            <option value="coffee">Coffee - കാപ്പി</option>
+                            <option value="tea">Tea - ചായ</option>
+                            <option value="arecanut">Arecanut - അടയ്ക്ക</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">📍 Your District</label>
+                        <select class="form-select" id="districtSelect">
+                            <option value="">Select your district...</option>
+                            <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                            <option value="kollam">Kollam</option>
+                            <option value="pathanamthitta">Pathanamthitta</option>
+                            <option value="alappuzha">Alappuzha</option>
+                            <option value="kottayam">Kottayam</option>
+                            <option value="idukki">Idukki</option>
+                            <option value="ernakulam">Ernakulam</option>
+                            <option value="thrissur">Thrissur</option>
+                            <option value="palakkad">Palakkad</option>
+                            <option value="malappuram">Malappuram</option>
+                            <option value="kozhikode">Kozhikode</option>
+                            <option value="wayanad">Wayanad</option>
+                            <option value="kannur">Kannur</option>
+                            <option value="kasaragod">Kasaragod</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">📏 Farm Size (Acres)</label>
+                        <input type="number" class="form-input" id="landSize" placeholder="Enter your farm size" min="0.1" step="0.1" value="2.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" style="opacity: 0;">Search</label>
+                        <button class="search-btn" onclick="analyzeMarket()">
+                            🚀 Analyze Market & Yield
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <div id="loadingSection" class="loading hidden">
+                <div class="loading-spinner">🌾</div>
+                <p>Analyzing market conditions and calculating yields...</p>
+            </div>
+
+            <div id="resultsSection" class="hidden">
+                <div class="results-grid" id="prices">
+                    <div class="price-card">
+                        <div class="card-header"><span class="card-icon">💰</span><h3 class="card-title">Market Price Analysis</h3></div>
+                        <div class="price-display">
+                            <span class="current-price" id="currentPrice">₹0</span>
+                            <div class="price-unit" id="priceUnit">per unit</div>
+                            <div class="price-trend" id="priceTrend"><span></span><span></span></div>
+                        </div>
+                        <div class="seasonal-info"><strong>🗓️ Seasonal Info:</strong><p id="seasonalInfo"></p></div>
+                        <div class="data-source">📊 Data: Simulated based on historical Kerala market trends</div>
+                    </div>
+
+                    <div class="yield-card" id="yield">
+                        <div class="card-header"><span class="card-icon">📊</span><h3 class="card-title">Yield & Profit Calculator</h3></div>
+                        <div class="yield-stats">
+                            <div class="stat-box"><div class="stat-number" id="yieldPerAcre">0</div><div class="stat-label">Quintals/Acre</div></div>
+                            <div class="stat-box"><div class="stat-number" id="totalYield">0</div><div class="stat-label">Total Production</div></div>
+                            <div class="stat-box"><div class="stat-number" id="grossRevenue">₹0</div><div class="stat-label">Gross Revenue</div></div>
+                            <div class="stat-box"><div class="stat-number" id="netProfit">₹0</div><div class="stat-label">Estimated Profit</div></div>
+                        </div>
+                        <div class="tips-section"><div class="tips-title"><span>💡</span><span>Optimization Tips</span></div><p id="farmingTips"></p></div>
+                    </div>
+
+                    <div class="market-card" id="markets">
+                        <div class="card-header"><span class="card-icon">🏪</span><h3 class="card-title">Nearby Markets</h3></div>
+                        <div class="market-list" id="marketsList"></div>
+                        <div class="data-source">📍 Based on Kerala agricultural market directory</div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="contact-section" id="opportunities">
+                <h2 style="color: var(--kerala-green); margin-bottom: 1rem;">🛍️ General Selling Opportunities</h2>
+                <p>Beyond local markets, explore these avenues to sell your produce.</p>
+                <div class="contact-grid">
+                    <div class="contact-item"><div class="contact-icon">🏢</div><strong>Local Farmers' Markets</strong><p>Direct sales in towns like Thiruvananthapuram, Kottayam, and Kozhikode.</p></div>
+                    <div class="contact-item"><div class="contact-icon">🤝</div><strong>Cooperative Societies</strong><p>Join societies like MARKFED Kerala for collective bargaining and wider reach.</p></div>
+                    <div class="contact-item"><div class="contact-icon">💻</div><strong>Online Platforms</strong><p>Utilize portals like <a href="https://www.enam.gov.in/" target="_blank" style="color: var(--kerala-green); font-weight: bold;">e-NAM</a> and the <a href="https://www.farmers.gov.in/" target="_blank" style="color: var(--kerala-green); font-weight: bold;">Farmers Portal</a>.</p></div>
+                    <div class="contact-item"><div class="contact-icon">🏭</div><strong>Value Addition</strong><p>Process crops (e.g., drying, powdering) to increase shelf life and income.</p></div>
+                </div>
+            </section>
+
+            <section class="contact-section" id="contact">
+                <h2 style="color: var(--kerala-green); margin-bottom: 1rem;">🤝 Get Live Data Integration</h2>
+                <p>Ready to implement real-time market data for your agricultural business or cooperative?</p>
+                <div class="contact-grid">
+                    <div class="contact-item"><div class="contact-icon">📧</div><strong>Email Integration</strong><p>API development and custom integration services</p></div>
+                    <div class="contact-item"><div class="contact-icon">📱</div><strong>Mobile App</strong><p>iOS and Android app development with live data</p></div>
+                    <div class="contact-item"><div class="contact-icon">🌐</div><strong>Web Platform</strong><p>Custom web portals for cooperatives and FPOs</p></div>
+                    <div class="contact-item"><div class="contact-icon">📊</div><strong>Analytics Dashboard</strong><p>Advanced reporting and market intelligence</p></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>💡 <strong>Pro Tip:</strong> Diversify crops, add value to your products, and explore government schemes for subsidies.</p>
+        
+     
+    </footer>
+
+    <script>
+        const keralaCropData = {
+            rice: { name: "Rice (Paddy)", malayalam: "നെല്ല്", basePrice: 2850, priceRange: [2600, 3200], yieldPerAcre: 25, costPerAcre: 45000, seasonality: "Kharif (Jun-Nov), Rabi (Dec-Apr)", tips: "Use high-yielding varieties like Jyothi, Uma. Maintain 2-5cm water level during flowering.", unit: "per quintal", trending: "up", trendValue: 4.2 },
+            coconut: { name: "Coconut", malayalam: "തെങ്ങ്", basePrice: 28, priceRange: [22, 35], yieldPerAcre: 8500, costPerAcre: 18000, seasonality: "Year-round harvest, peak during winter", tips: "Plant dwarf hybrid varieties. Regular irrigation increases yield by 25%.", unit: "per nut", trending: "stable", trendValue: 1.1 },
+            rubber: { name: "Rubber", malayalam: "റബ്ബർ", basePrice: 185, priceRange: [165, 220], yieldPerAcre: 950, costPerAcre: 28000, seasonality: "Tapping season: Oct-Feb (dry months)", tips: "Clone varieties RRII 105, RRII 118 perform best. Start tapping in 6th year.", unit: "per kg", trending: "down", trendValue: -2.8 },
+            pepper: { name: "Black Pepper", malayalam: "കുരുമുളക്", basePrice: 52000, priceRange: [45000, 65000], yieldPerAcre: 12, costPerAcre: 85000, seasonality: "Harvest: Nov-Jan", tips: "Intercrop with coconut/arecanut. Varieties Panniyur-1, Karimunda suit Kerala climate.", unit: "per quintal", trending: "up", trendValue: 8.5 },
+            cardamom: { name: "Cardamom", malayalam: "ഏലം", basePrice: 1850, priceRange: [1600, 2200], yieldPerAcre: 2.5, costPerAcre: 125000, seasonality: "Main harvest: Oct-Dec", tips: "Grows best at 900-1200m altitude with 75% shade. Organic cultivation gets premium prices.", unit: "per kg", trending: "up", trendValue: 12.3 },
+            ginger: { name: "Ginger", malayalam: "ഇഞ്ചി", basePrice: 85, priceRange: [70, 120], yieldPerAcre: 85, costPerAcre: 65000, seasonality: "Plant: May-Jun, Harvest: Dec-Jan", tips: "Varieties Rio-de-Janeiro, Maran perform well. Mulching prevents rhizome rot.", unit: "per kg", trending: "up", trendValue: 6.7 },
+            turmeric: { name: "Turmeric", malayalam: "മഞ്ഞൾ", basePrice: 9500, priceRange: [8000, 11000], yieldPerAcre: 9, costPerAcre: 55000, seasonality: "Plant: May-Jun, Harvest: Jan-Feb", tips: "Use 'Alleppey Finger' variety for high curcumin content. Mulching is essential.", unit: "per quintal", trending: "up", trendValue: 5.1 },
+            cashew: { name: "Cashew", malayalam: "കശുവണ്ടി", basePrice: 11000, priceRange: [9000, 13000], yieldPerAcre: 4.5, costPerAcre: 25000, seasonality: "Harvest: Mar-May", tips: "High-density planting can increase yield. Pruning after harvest is recommended.", unit: "per quintal (raw nut)", trending: "stable", trendValue: 0.8 },
+            banana: { name: "Banana (Nendran)", malayalam: "വാഴ", basePrice: 40, priceRange: [35, 45], yieldPerAcre: 95, costPerAcre: 70000, seasonality: "Year-round, peaks depending on planting time.", tips: "Tissue culture plantains give uniform and high yield. Bunch covering protects from pests.", unit: "per kg", trending: "up", trendValue: 3.5 },
+            plantain: { name: "Plantain", malayalam: "ഏത്തക്കായ", basePrice: 30, priceRange: [25, 35], yieldPerAcre: 65, costPerAcre: 60000, seasonality: "Can be cultivated year-round.", tips: "Good for intercropping. Ensure proper support to prevent plants from falling over.", unit: "per kg", trending: "stable", trendValue: 2.0 },
+            pineapple: { name: "Pineapple", malayalam: "കൈതച്ചക്ക", basePrice: 25, priceRange: [20, 30], yieldPerAcre: 240, costPerAcre: 80000, seasonality: "Two main seasons: May-Aug and Dec-Mar.", tips: "Vazhakulam is famous for its GI-tagged pineapple. Use growth regulators for uniform flowering.", unit: "per quintal", trending: "up", trendValue: 4.5 },
+            coffee: { name: "Coffee", malayalam: "കാപ്പി", basePrice: 7500, priceRange: [6500, 8500], yieldPerAcre: 3.5, costPerAcre: 40000, seasonality: "Harvest: Dec-Feb (Arabica)", tips: "Wayanad and Idukki are prime regions. Shade-grown coffee fetches a premium price.", unit: "per quintal (beans)", trending: "stable", trendValue: 1.5 },
+            tea: { name: "Tea", malayalam: "ചായ", basePrice: 160, priceRange: [140, 190], yieldPerAcre: 90, costPerAcre: 90000, seasonality: "Plucking is year-round, peak quality post-monsoon.", tips: "High-altitude tea from Munnar is world-renowned. Regular plucking ensures quality.", unit: "per kg (made tea)", trending: "down", trendValue: -1.2 },
+            arecanut: { name: "Arecanut", malayalam: "അടയ്ക്ക", basePrice: 42000, priceRange: [38000, 48000], yieldPerAcre: 5, costPerAcre: 60000, seasonality: "Harvesting: Sep-Dec.", tips: "Intercropping with pepper or banana is common. Look for disease-resistant varieties.", unit: "per quintal (dried)", trending: "up", trendValue: 7.1 }
+        };
+
+        const keralaMarkets = {
+            thiruvananthapuram: [{ name: "Chala Market", type: "Wholesale", distance: "5 km" }, { name: "Peroorkada Market", type: "Retail", distance: "12 km" }],
+            kollam: [{ name: "Anchal Market", type: "Wholesale/Retail", distance: "8 km" }],
+            pathanamthitta: [{ name: "Kumbazha Market", type: "Wholesale", distance: "6 km" }],
+            alappuzha: [{ name: "Mullakkal Market", type: "Retail", distance: "4 km" }],
+            kottayam: [{ name: "Kottayam Market", type: "Wholesale", distance: "3 km" }],
+            idukki: [{ name: "Thodupuzha Market", type: "Wholesale (Spices)", distance: "15 km" }, { name: "Nedumkandam Market", type: "Retail", distance: "25 km" }],
+            ernakulam: [{ name: "Kaloor Market", type: "Wholesale", distance: "8 km" }, { name: "Aluva Market", type: "Retail", distance: "15 km" }],
+            thrissur: [{ name: "Ollur Market", type: "Wholesale", distance: "10 km" }, { name: "Chalakudy Market", type: "Retail", distance: "18 km" }],
+            palakkad: [{ name: "Palakkad Big Market", type: "Wholesale", distance: "7 km" }],
+            malappuram: [{ name: "Kottakkal Market", type: "Retail", distance: "9 km" }],
+            kozhikode: [{ name: "Valiyangadi (Big Bazaar)", type: "Wholesale", distance: "2 km" }],
+            wayanad: [{ name: "Kalpetta New Bus Stand Market", type: "Retail", distance: "5 km" }],
+            kannur: [{ name: "Ayikkara Market", type: "Wholesale (Fish/Agri)", distance: "6 km" }],
+            kasaragod: [{ name: "Kasaragod Market", type: "Retail", distance: "4 km" }]
+        };
+
+        function analyzeMarket() {
+            const cropKey = document.getElementById("cropSelect").value;
+            const districtKey = document.getElementById("districtSelect").value;
+            const landSize = parseFloat(document.getElementById("landSize").value);
+
+            if (!cropKey || !districtKey || !landSize) {
+                alert("⚠️ Please select crop, district, and farm size.");
+                return;
+            }
+
+            const crop = keralaCropData[cropKey];
+            document.getElementById("loadingSection").classList.remove("hidden");
+            document.getElementById("resultsSection").classList.add("hidden");
+
+            setTimeout(() => {
+                document.getElementById("loadingSection").classList.add("hidden");
+                document.getElementById("resultsSection").classList.remove("hidden");
+
+                document.getElementById("currentPrice").innerText = `₹${crop.basePrice.toLocaleString()}`;
+                document.getElementById("priceUnit").innerText = crop.unit;
+                
+                let trendClass = "trend-stable", trendText = "Stable", trendIcon = "➖";
+                if (crop.trending === "up") {
+                    trendClass = "trend-up"; trendText = `Rising (+${crop.trendValue}%)`; trendIcon = "📈";
+                } else if (crop.trending === "down") {
+                    trendClass = "trend-down"; trendText = `Falling (${crop.trendValue}%)`; trendIcon = "📉";
+                }
+                const priceTrend = document.getElementById("priceTrend");
+                priceTrend.className = `price-trend ${trendClass}`;
+                priceTrend.innerHTML = `<span>${trendIcon}</span> <span>${trendText}</span>`;
+
+                document.getElementById("seasonalInfo").innerText = crop.seasonality;
+
+                const yieldPerAcre = crop.yieldPerAcre;
+                const totalYield = yieldPerAcre * landSize;
+                const grossRevenue = totalYield * (crop.unit.includes("quintal") ? crop.basePrice : crop.basePrice * 100);
+                const netProfit = grossRevenue - (crop.costPerAcre * landSize);
+
+                document.getElementById("yieldPerAcre").innerText = yieldPerAcre.toLocaleString();
+                document.getElementById("totalYield").innerText = totalYield.toLocaleString(undefined, {maximumFractionDigits: 1});
+                document.getElementById("grossRevenue").innerText = `₹${grossRevenue.toLocaleString()}`;
+                document.getElementById("netProfit").innerText = `₹${netProfit.toLocaleString()}`;
+                document.getElementById("farmingTips").innerText = crop.tips;
+
+                const marketsList = document.getElementById("marketsList");
+                marketsList.innerHTML = "";
+                const markets = keralaMarkets[districtKey] || [{ name: "No specific markets listed for this district", type: "General", distance: "-" }];
+                markets.forEach(market => {
+                    const div = document.createElement("div");
+                    div.className = "market-item";
+                    div.innerHTML = `<div class="market-info"><div class="market-name">${market.name}</div><div class="market-type">${market.type}</div></div><div class="market-distance">${market.distance}</div>`;
+                    marketsList.appendChild(div);
+                });
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
