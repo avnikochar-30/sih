@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerala Farmer Weather Dashboard</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
+    header { background: #00796b; color: white; text-align: center; padding: 15px 0; }
+    .container { width: 90%; max-width: 900px; margin: 20px auto; }
+    select { padding: 8px; margin: 10px 0; font-size: 16px; }
+    .forecast, .warning { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    .forecast h2, .warning h2 { margin-top: 0; }
+    .day { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd;}
+    .day:last-child { border-bottom: none; }
+    .warning { border-left: 5px solid #f44336; background: #ffebee;}
+    footer { text-align: center; padding: 10px 0; background: #00796b; color: white; }
+</style>
+</head>
+<body>
+<header>
+    <h1>Kerala Farmer Weather Dashboard</h1>
+</header>
+<div class="container">
+    <label for="city">Select a city:</label>
+    <select id="city">
+        <option value="10.8505,76.2711,Kochi">Kochi</option>
+        <option value="9.9312,76.2673,Thiruvananthapuram">Thiruvananthapuram</option>
+        <option value="11.2588,75.7804,Calicut">Calicut</option>
+        <option value="10.0231,76.3088,Palakkad">Palakkad</option>
+        <option value="9.5916,76.5228,Kollam">Kollam</option>
+        <option value="11.2233,75.7800,Kannur">Kannur</option>
+    </select>
+
+    <div class="forecast">
+        <h2>7-Day Forecast</h2>
+        <div id="forecast"></div>
+    </div>
+
+    <div class="warning">
+        <h2>Advisory / Warnings</h2>
+        <div id="warnings"></div>
+    </div>
+</div>
+<footer>
+    <p>Powered by OpenWeatherMap</p>
+</footer>
+
+<script>
+const apiKey = '35797dc5151a6c4302b94c5b330ce5f4';
+
+document.getElementById('city').addEventListener('change', fetchWeather);
+
+async function fetchWeather() {
+    const cityVal = document.getElementById('city').value;
+    const [lat, lon, cityName] = cityVal.split(',');
+    try {
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=metric&lang=en&appid=${apiKey}`);
+        const data = await res.json();
+        displayForecast(data.daily, cityName);
+        displayWarnings(data.daily, cityName);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+function displayForecast(daily, cityName) {
+    const forecastDiv = document.getElementById('forecast');
+    forecastDiv.innerHTML = '';
+    daily.forEach(day => {
+        const date = new Date(day.dt * 1000);
+        const options = { weekday: 'long', day: 'numeric', month: 'short' };
+        const advice = irrigationAdvice(day);
+        const div = document.createElement('div');
+        div.classList.add('day');
+        div.innerHTML = `
+            <span>${date.toLocaleDateString('en-US', options)} (${date.toLocaleDateString('ml-IN', options)})</span>
+            <span>${day.temp.day.toFixed(1)}°C</span>
+            <span>${day.weather[0].description}</span>
+            <span>${advice}</span>
+        `;
+        forecastDiv.appendChild(div);
+    });
+}
+
+function displayWarnings(daily, cityName) {
+    const warningsDiv = document.getElementById('warnings');
+    warningsDiv.innerHTML = '';
+    const tomorrow = daily[1]; 
+    let messages = [];
+    if(tomorrow.temp.max > 36){
+        messages.push(`High temperature alert for ${cityName}: ${tomorrow.temp.max.toFixed(1)}°C tomorrow`);
+    }
+    daily.forEach(day => {
+        const desc = day.weather[0].main.toLowerCase();
+        if(desc.includes('storm') || desc.includes('tornado') || desc.includes('hurricane') || desc.includes('rain')){
+            messages.push(`Weather advisory: ${new Date(day.dt*1000).toLocaleDateString()} - ${day.weather[0].description}`);
+        }
+    });
+    if(messages.length === 0){
+        warningsDiv.innerHTML = '<p>No warnings currently.</p>';
+    } else {
+        const ul = document.createElement('ul');
+        messages.forEach(msg => {
+            const li = document.createElement('li');
+            li.textContent = msg;
+            ul.appendChild(li);
+        });
+        warningsDiv.appendChild(ul);
+    }
+}
+
+function irrigationAdvice(day){
+    if(day.rain && day.rain > 5){
+        return "Do not irrigate (rain expected)";
+    } else if(day.temp.max > 38){
+        return "Irrigation recommended (high temp)";
+    } else {
+        return "Irrigation optional";
+    }
+}
+
+// Initialize for first city
+fetchWeather();
+</script>
+</body>
+</html>
